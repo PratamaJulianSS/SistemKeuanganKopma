@@ -203,16 +203,32 @@ $list = mysqli_query($conn, "SELECT * FROM transaksi WHERE user_id=$uid ORDER BY
     <a href="transaksi.php" class="active">💳 Transaksi</a>
     <a href="riwayat.php">📄 Riwayat</a>
   </div>
-
+  
   <!-- Header -->
-  <div class="header">
-    <h5>KOPERASI SATRIA MANUNGGAL</h5>
-    <div class="user-info">
-      <img src="<?= $user['foto'] ? '../uploads/' . $user['foto'] : '../assets/default.png' ?>" alt="Foto Profil">
-      <span><?= htmlspecialchars($name) ?></span>
-      <a href="../logout.php">Logout</a>
-    </div>
+<div class="header">
+  <div class="d-flex align-items-center">
+    <img src="../assets/logo.png" 
+         style="
+            width:35px;
+            height:35px;
+            margin-right:10px;
+            border-radius:50%;
+            border: 2px solid #fff;
+            object-fit:cover;
+         ">
+    <h5 class="m-0" style="font-weight:600;">KOPERASI SATRIA MANUNGGAL</h5>
   </div>
+
+  <div class="user-info d-flex align-items-center">
+    <img src="<?= $user['foto'] ? '../uploads/' . $user['foto'] : '../assets/default.png' ?>" 
+         alt="Foto Profil">
+
+    <span><?= htmlspecialchars($name) ?> (Member)</span>
+
+    <a href="../logout.php" class="text-white ms-3">Logout</a>
+  </div>
+</div>
+
 
   <!-- Main Content -->
   <div class="main-content">
