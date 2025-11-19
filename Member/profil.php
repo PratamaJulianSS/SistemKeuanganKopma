@@ -33,13 +33,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if (!empty($_POST['password'])) {
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $stmt = mysqli_prepare($conn, "UPDATE users SET name=?, username=?, nta=?, telepon=?, alamat=?, foto=?, password=? WHERE id=?");
-    mysqli_stmt_bind_param($stmt, "sssssssi", $nama, $username, $nta, $telepon, $alamat, $foto, $password, $uid);
+    $password = $_POST['password']; // tidak di-hash
+
+    $stmt = mysqli_prepare(
+      $conn,
+      "UPDATE users SET name=?, username=?, nta=?, telepon=?, alamat=?, foto=?, password=? WHERE id=?"
+    );
+    mysqli_stmt_bind_param(
+      $stmt,
+      "sssssssi",
+      $nama,
+      $username,
+      $nta,
+      $telepon,
+      $alamat,
+      $foto,
+      $password,
+      $uid
+    );
   } else {
-    $stmt = mysqli_prepare($conn, "UPDATE users SET name=?, username=?, nta=?, telepon=?, alamat=?, foto=? WHERE id=?");
-    mysqli_stmt_bind_param($stmt, "ssssssi", $nama, $username, $nta, $telepon, $alamat, $foto, $uid);
+
+    $stmt = mysqli_prepare(
+      $conn,
+      "UPDATE users SET name=?, username=?, nta=?, telepon=?, alamat=?, foto=? WHERE id=?"
+    );
+    mysqli_stmt_bind_param(
+      $stmt,
+      "ssssssi",
+      $nama,
+      $username,
+      $nta,
+      $telepon,
+      $alamat,
+      $foto,
+      $uid
+    );
   }
+
   mysqli_stmt_execute($stmt);
   mysqli_stmt_close($stmt);
 
@@ -201,7 +231,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <!-- Header -->
   <div class="header">
-    <h5>KOPERASI SATRIA MANUNGGAL</h5>
+    <div class="d-flex align-items-center">
+      <img src="../assets/logo.png" style="width:35px;height:35px;margin-right:10px;">
+      <h5 class="m-0">KOPERASI SATRIA MANUNGGAL</h5>
+    </div>
     <div class="d-flex align-items-center">
       <img src="<?= $user['foto'] ? '../uploads/' . $user['foto'] : '../assets/default.png' ?>" alt="Foto Profil">
       <span class="ms-2"><?= htmlspecialchars($name) ?> (Member)</span>
