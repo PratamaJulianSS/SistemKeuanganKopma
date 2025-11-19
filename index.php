@@ -15,4 +15,5 @@ if ($_SESSION['role'] === 'admin') {
     header("Location: member/dashboard.php");
     exit;
 }
+
 ?>
