@@ -205,7 +205,10 @@ $list = mysqli_query($conn, "SELECT * FROM simpanan WHERE user_id=$uid ORDER BY 
 
   <!-- Header -->
   <div class="header">
-    <h5>KOPERASI SATRIA MANUNGGAL</h5>
+    <div class="d-flex align-items-center">
+      <img src="../assets/logo.png" style="width:35px;height:35px;margin-right:10px;">
+      <h5 class="m-0">KOPERASI SATRIA MANUNGGAL</h5>
+    </div>
     <div class="d-flex align-items-center">
       <img src="<?= $user['foto'] ? '../uploads/' . $user['foto'] : '../assets/default.png' ?>" alt="Foto Profil">
       <span class="ms-2"><?= htmlspecialchars($name) ?> (Member)</span>
