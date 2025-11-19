@@ -47,6 +47,7 @@ $list = mysqli_query($conn, "SELECT * FROM riwayat WHERE user_id=$uid ORDER BY i
     .header h5 {
       margin: 0;
       font-weight: 600;
+      line-height: 1;
     }
 
     .header .user-info {
@@ -68,6 +69,7 @@ $list = mysqli_query($conn, "SELECT * FROM riwayat WHERE user_id=$uid ORDER BY i
       text-decoration: none;
       font-weight: 500;
       transition: 0.3s;
+      margin-left: 10px;
     }
 
     .header a:hover {
@@ -103,11 +105,11 @@ $list = mysqli_query($conn, "SELECT * FROM riwayat WHERE user_id=$uid ORDER BY i
       margin-bottom: 8px;
     }
 
-    .sidebar .profile-sidebar .name {
+    .sidebar .name {
       font-weight: 600;
     }
 
-    .sidebar .profile-sidebar .role {
+    .sidebar .role {
       font-size: 13px;
       opacity: 0.8;
     }
@@ -161,7 +163,19 @@ $list = mysqli_query($conn, "SELECT * FROM riwayat WHERE user_id=$uid ORDER BY i
 
   <!-- Header -->
   <div class="header">
-    <h5>KOPERASI SATRIA MANUNGGAL</h5>
+  <div class="d-flex align-items-center">
+    <img src="../assets/logo.png" 
+         style="
+            width:35px;
+            height:35px;
+            margin-right:10px;
+            border-radius:50%;
+            border: 2px solid #fff;
+            object-fit:cover;
+         ">
+    <h5 class="m-0" style="font-weight:600;">KOPERASI SATRIA MANUNGGAL</h5>
+  </div>
+
     <div class="user-info">
       <img src="<?= $user['foto'] ? '../uploads/' . $user['foto'] : '../assets/default.png' ?>" alt="Foto Profil">
       <span><?= htmlspecialchars($name) ?> (Member)</span>
@@ -185,8 +199,7 @@ $list = mysqli_query($conn, "SELECT * FROM riwayat WHERE user_id=$uid ORDER BY i
           </tr>
         </thead>
         <tbody>
-          <?php $no = 1;
-          while ($r = mysqli_fetch_assoc($list)): ?>
+          <?php $no = 1; while ($r = mysqli_fetch_assoc($list)): ?>
             <tr>
               <td><?= $no++ ?></td>
               <td><?= htmlspecialchars($r['aksi']) ?></td>
@@ -194,6 +207,7 @@ $list = mysqli_query($conn, "SELECT * FROM riwayat WHERE user_id=$uid ORDER BY i
               <td><?= htmlspecialchars($r['created_at']) ?></td>
             </tr>
           <?php endwhile; ?>
+
           <?php if (mysqli_num_rows($list) == 0): ?>
             <tr>
               <td colspan="4" class="text-center text-muted">Belum ada aktivitas yang tercatat.</td>
